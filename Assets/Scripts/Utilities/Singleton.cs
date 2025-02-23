@@ -11,7 +11,7 @@ public class Singleton<T> : MonoBehaviour where T: MonoBehaviour
         {
             if(m_instance == null)
             {
-                m_instance = GameObject.FindObjectOfType<T>();
+                m_instance = FindAnyObjectByType<T>();
 
                 if(m_instance == null)
                 {

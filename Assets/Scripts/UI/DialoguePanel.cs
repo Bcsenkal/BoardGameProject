@@ -31,7 +31,7 @@ namespace UI
                 cancellationToken.Dispose();
                 cancellationToken = new CancellationTokenSource();
             }
-            ShowNotEnoughMoney();
+            _ = ShowNotEnoughMoney();
         }
 
         private async UniTask ShowNotEnoughMoney()

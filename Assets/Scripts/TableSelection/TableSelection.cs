@@ -58,13 +58,14 @@ public class TableSelection : MonoBehaviour
 
     private void CreateTable()
     {
-        Debug.Log(ResourceManager.Instance.GetCurrentCoin());
+
         if(ResourceManager.Instance.GetCurrentCoin() < tableInfo.minimumBet)
         {
             Managers.EventManager.Instance.ONOnNotEnoughMoney();
             return;
         }
         var tableCreationInfo = new TableCreationInfo(tableInfo.tableType, tableInfo.minimumBet, 2);
+        Managers.EventManager.Instance.ONOnCreateTable(tableCreationInfo);
         Debug.Log("Table Created with " + tableCreationInfo.tableType + " " + tableCreationInfo.currentBet + " " + tableCreationInfo.playerCount);
     }
 }

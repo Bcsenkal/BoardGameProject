@@ -3,11 +3,19 @@ using System.Collections.Generic;
 using Managers;
 using UnityEngine;
 
+public struct PlayerStats
+{
+    public string playerName;
+    public int winCount;
+    public int loseCount;
+    public int currentCoin;
+}
 public class ResourceManager : Singleton<ResourceManager>
 {
     private int currentCoin;
     private int winCount;
     private int loseCount;
+    private string playerName;
 
     protected override void Awake() 
     {
@@ -21,7 +29,42 @@ public class ResourceManager : Singleton<ResourceManager>
         currentCoin = ES3.Load("TotalCoin",startingCoin);
         winCount = ES3.Load("WinCount",0);
         loseCount = ES3.Load("LoseCount",0);
+        playerName = ES3.LoadString("PlayerName","Player");
     }
+
+    #region Stats
+
+    public void AddWinCount()
+    {
+        winCount += 1;
+        ES3.Save("WinCount",winCount);
+    }
+
+    public void AddLoseCount()
+    {
+        loseCount += 1;
+        ES3.Save("LoseCount",loseCount);
+    }
+    
+    public void SetPlayerName(string name)
+    {
+        playerName = name;
+        ES3.Save("PlayerName",name);
+    }
+
+    public PlayerStats GetPlayerStats()
+    {
+        var stats = new PlayerStats();
+        stats.playerName = playerName;
+        stats.winCount = winCount;
+        stats.loseCount = loseCount;
+        stats.currentCoin = currentCoin;
+        return stats;
+    }
+
+    
+
+    #endregion
 
     #region Coin
     
@@ -48,7 +91,6 @@ public class ResourceManager : Singleton<ResourceManager>
     {
         return currentCoin;
     }
-    
 
     public bool HasEnoughCoin(int price)
     {

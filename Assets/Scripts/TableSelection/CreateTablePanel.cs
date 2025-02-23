@@ -43,7 +43,7 @@ public class CreateTablePanel : MonoBehaviour
         tableInfo = info;
         betSlider.SetBetRange(info);
         transform.localScale = Vector3.one;
-        ShowPanelRoutine();
+        _ = ShowPanelRoutine();
     }
 
     private async UniTask ShowPanelRoutine()
@@ -57,7 +57,7 @@ public class CreateTablePanel : MonoBehaviour
     {
         createTableButton.onClick.RemoveListener(CreateTable);
         closeButton.onClick.RemoveListener(HidePanel);
-        HidePanelRoutine();
+        _ = HidePanelRoutine();
     }
 
     private async UniTask HidePanelRoutine()
@@ -68,10 +68,15 @@ public class CreateTablePanel : MonoBehaviour
 
     private void CreateTable()
     {
-        if(ResourceManager.Instance.GetCurrentCoin() < betSlider.GetCurrentBet()) return;
+        if(ResourceManager.Instance.GetCurrentCoin() < betSlider.GetCurrentBet())
+        {
+            Managers.EventManager.Instance.ONOnNotEnoughMoney();
+            return;
+        }
         TableCreationInfo tableCreationInfo = new(tableInfo.tableType, betSlider.GetCurrentBet(), playerSelection.GetPlayerCount());
         createTableButton.onClick.RemoveListener(CreateTable);
         closeButton.onClick.RemoveListener(HidePanel);
+        Managers.EventManager.Instance.ONOnCreateTable(tableCreationInfo);
         Debug.Log("Table Created with " + tableCreationInfo.tableType + " " + tableCreationInfo.currentBet + " " + tableCreationInfo.playerCount);
         transform.localScale = Vector3.zero;
     }

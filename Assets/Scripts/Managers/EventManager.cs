@@ -36,10 +36,26 @@ namespace Managers
         #region Table Creation
 
         public event System.Action<TableInfo> OnShowCreateTablePanel;
+        public event System.Action<TableCreationInfo> OnCreateTable;
 
         public void ONOnShowCreateTable(TableInfo tableCreationInfo)
         {
             OnShowCreateTablePanel?.Invoke(tableCreationInfo);
+        }
+
+        public void ONOnCreateTable(TableCreationInfo tableCreationInfo)
+        {
+            OnCreateTable?.Invoke(tableCreationInfo);
+        }
+        #endregion
+
+        #region Card Dealing
+
+        public event System.Action<PlayerHand> OnDealCardsToPlayer;
+
+        public void ONOnDealCardsToPlayer(PlayerHand playerHand)
+        {
+            OnDealCardsToPlayer?.Invoke(playerHand);
         }
         #endregion
         
