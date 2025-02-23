@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 namespace UI.MainMenu
 {
-    public class ButtonAnimation : MonoBehaviour, IPointerDownHandler
+    public class ButtonAnimation : MonoBehaviour, IPointerClickHandler
     {
         private RectTransform _rect;
         private readonly Vector3 _defaultScale = new Vector3(1f, 1f, 1f);
@@ -30,9 +30,7 @@ namespace UI.MainMenu
             
         }
 
-        
-
-        public void OnPointerDown(PointerEventData eventData)
+        public void OnPointerClick(PointerEventData eventData)
         {
             if (Disabled) return;
             _rect.localScale = _pressedDownScale;

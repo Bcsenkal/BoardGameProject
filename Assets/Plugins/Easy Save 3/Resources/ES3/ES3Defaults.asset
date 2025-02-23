@@ -43,11 +43,14 @@ MonoBehaviour:
     - LitMotion
     - LitMotion.Extensions
     - ParticleImage
+    - SimpleInspectorAttributes
+    - SimpleScrollSnap
     - UniTask
     - UniTask.Addressables
     - UniTask.DOTween
     - UniTask.Linq
     - UniTask.TextMeshPro
+    - Utilities
     showAdvancedSettings: 0
   addMgrToSceneAutomatically: 0
   autoUpdateReferences: 1
