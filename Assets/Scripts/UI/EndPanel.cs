@@ -13,6 +13,7 @@ public class EndPanel : MonoBehaviour
     private Button leaveLobbyButton;
     private Transform panel;
     private int currentBet;
+    private int playerCount;
 
     void Start()
     {
@@ -29,15 +30,16 @@ public class EndPanel : MonoBehaviour
     private void SetBetInfo(TableCreationInfo tableCreationInfo)
     {
         currentBet = tableCreationInfo.currentBet;
+        playerCount = tableCreationInfo.playerCount;
     }
 
     private void ShowPanel(bool isWin)
     {
         resultText.text = isWin ? "YOU WIN!" : "YOU LOSE!";
-        moneyText.text = isWin ? "+ " + XearUtils.ThousandFormat(currentBet * 2) : "- " + XearUtils.ThousandFormat(currentBet);
+        moneyText.text = isWin ? "+ " + XearUtils.ThousandFormat(currentBet * playerCount) : "- " + XearUtils.ThousandFormat(currentBet);
         if(isWin)
         {
-            ResourceManager.Instance.AddCoin(currentBet * 2);
+            ResourceManager.Instance.AddCoin(currentBet * playerCount);
             ResourceManager.Instance.AddWinCount();
         }
         else
