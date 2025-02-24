@@ -11,12 +11,16 @@ public class TableCreationInfo
     public GameMode tableType;
     public int currentBet;
     public int playerCount;
+    public int minimumBet;
+    public int maximumBet;
 
-    public TableCreationInfo(GameMode tableType, int currentBet, int playerCount)
+    public TableCreationInfo(GameMode tableType, int currentBet, int playerCount, int minimumBet, int maximumBet)
     {
         this.tableType = tableType;
         this.currentBet = currentBet;
         this.playerCount = playerCount;
+        this.minimumBet = minimumBet;
+        this.maximumBet = maximumBet;
     }
 }
 public class CreateTablePanel : MonoBehaviour
@@ -68,16 +72,17 @@ public class CreateTablePanel : MonoBehaviour
 
     private void CreateTable()
     {
-        if(ResourceManager.Instance.GetCurrentCoin() < betSlider.GetCurrentBet())
+        if(ResourceManager.Instance.GetCurrentCoin() < betSlider.GetCurrentBet()) 
         {
             Managers.EventManager.Instance.ONOnNotEnoughMoney();
             return;
         }
-        TableCreationInfo tableCreationInfo = new(tableInfo.tableType, betSlider.GetCurrentBet(), playerSelection.GetPlayerCount());
+        TableCreationInfo tableCreationInfo = new(tableInfo.tableType, betSlider.GetCurrentBet(), playerSelection.GetPlayerCount(), tableInfo.minimumBet, tableInfo.maximumBet);
         createTableButton.onClick.RemoveListener(CreateTable);
         closeButton.onClick.RemoveListener(HidePanel);
+        HidePanel();
+        ResourceManager.Instance.SpendCoin(betSlider.GetCurrentBet());
         Managers.EventManager.Instance.ONOnCreateTable(tableCreationInfo);
-        Debug.Log("Table Created with " + tableCreationInfo.tableType + " " + tableCreationInfo.currentBet + " " + tableCreationInfo.playerCount);
         transform.localScale = Vector3.zero;
     }
 }

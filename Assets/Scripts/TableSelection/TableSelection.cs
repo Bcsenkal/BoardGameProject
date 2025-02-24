@@ -64,8 +64,8 @@ public class TableSelection : MonoBehaviour
             Managers.EventManager.Instance.ONOnNotEnoughMoney();
             return;
         }
-        var tableCreationInfo = new TableCreationInfo(tableInfo.tableType, tableInfo.minimumBet, 2);
+        var tableCreationInfo = new TableCreationInfo(tableInfo.tableType, tableInfo.minimumBet, 2, tableInfo.minimumBet, tableInfo.maximumBet);
+        ResourceManager.Instance.SpendCoin(tableInfo.minimumBet);
         Managers.EventManager.Instance.ONOnCreateTable(tableCreationInfo);
-        Debug.Log("Table Created with " + tableCreationInfo.tableType + " " + tableCreationInfo.currentBet + " " + tableCreationInfo.playerCount);
     }
 }

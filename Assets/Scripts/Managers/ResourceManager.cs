@@ -25,8 +25,8 @@ public class ResourceManager : Singleton<ResourceManager>
 
     private void LoadResources()
     {
-        var startingCoin = 1000;
-        currentCoin = ES3.Load("TotalCoin",startingCoin);
+        var savedCoin = ES3.Load("TotalCoin",1000);
+        currentCoin = savedCoin <= 0 ? 1000 : savedCoin;
         winCount = ES3.Load("WinCount",0);
         loseCount = ES3.Load("LoseCount",0);
         playerName = ES3.LoadString("PlayerName","Player");
