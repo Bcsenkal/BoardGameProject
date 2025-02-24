@@ -191,5 +191,6 @@ public class PlayerHand : MonoBehaviour
         IsPlaying = false;
         totalPoints = 0;
         ingamePlayerInfo.UpdateScore(totalPoints);
+        ingamePlayerInfo.UpdateMoney();
     }
 }

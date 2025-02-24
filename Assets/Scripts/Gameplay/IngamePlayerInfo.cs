@@ -31,4 +31,10 @@ public class IngamePlayerInfo : MonoBehaviour
     {
         scoreText.text = score.ToString();
     }
+
+    public void UpdateMoney()
+    {
+        if(IsBot) return;
+        moneyText.text = XearUtils.ThousandFormat(ResourceManager.Instance.GetCurrentCoin());
+    }
 }
